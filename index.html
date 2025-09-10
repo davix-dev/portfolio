@@ -5,139 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Davix's Portfolio</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a2e, #111827);
-      color: #e5e7eb;
-      line-height: 1.6;
-    }
-    nav {
-      background: #1a1a1a;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 12px 0;
-    }
-    nav ul li {
-      margin: 0 15px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #e5e7eb;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-    nav ul li a:hover {
-      color: #6366f1;
-    }
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 40px auto;
-    }
-    section {
-      margin-bottom: 60px;
-    }
-    section h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #6366f1;
-      margin-bottom: 20px;
-    }
-    .about {
-      background: linear-gradient(135deg, #1a1a1a, #1f2937);
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-      text-align: center;
-    }
-    .about h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: #e5e7eb;
-    }
-    .about h2 span {
-      color: #6366f1;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .project {
-      background: #1a1a1a;
-      padding: 10px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.8);
-    }
-    .project h3 {
-      color: #6366f1;
-      margin: 10px 0 5px 0;
-    }
-    .project video {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-    .project p {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .overlay video {
-      width: 80%;
-      max-width: 900px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.9);
-    }
-    .overlay .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-    .contact {
-      background: #1a1a1a;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-      text-align: center;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f0f0f, #1a1a2e, #111827); color: #e5e7eb; line-height: 1.6; }
+    nav { background: #1a1a1a; box-shadow: 0 2px 6px rgba(0,0,0,0.5); position: sticky; top: 0; z-index: 10; }
+    nav ul { display: flex; justify-content: center; list-style: none; padding: 12px 0; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a { text-decoration: none; color: #e5e7eb; font-weight: 600; transition: color 0.3s ease; }
+    nav ul li a:hover { color: #6366f1; }
+    .container { width: 90%; max-width: 1000px; margin: 40px auto; }
+    section { margin-bottom: 60px; }
+    section h2 { text-align: center; font-size: 2rem; color: #6366f1; margin-bottom: 20px; }
+    .about { background: linear-gradient(135deg, #1a1a1a, #1f2937); padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.7); text-align: center; }
+    .about h2 { font-size: 2.5rem; margin-bottom: 15px; color: #e5e7eb; }
+    .about h2 span { color: #6366f1; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    .project { background: #1a1a1a; padding: 10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.6); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+    .project:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.8); }
+    .project h3 { color: #6366f1; margin: 10px 0 5px 0; }
+    .project video { width: 100%; border-radius: 8px; margin-bottom: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .project p { font-size: 0.9rem; color: #aaa; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .overlay video { width: 80%; max-width: 900px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.9); }
+    .overlay .close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; }
+    .contact { background: #1a1a1a; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.6); text-align: center; }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+
   <nav>
     <ul>
       <li><a href="#about">About Me</a></li>
@@ -147,7 +41,6 @@
   </nav>
 
   <div class="container">
-    <!-- About Me -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about">
@@ -156,22 +49,20 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <h2>My Projects</h2>
       <div class="projects">
         <div class="project" data-video="GAG.mp4">
           <h3>Grow a Garden System</h3>
-          <video src="GAG.mp4" muted autoplay loop></video>
+          <video src="GAG.mp4" muted autoplay loop preload="auto" poster="poster_gag.jpg"></video>
         </div>
         <div class="project" data-video="click.mp4">
           <h3>Clicker Simulator System</h3>
-          <video src="click.mp4" muted autoplay loop></video>
+          <video src="click.mp4" muted autoplay loop preload="auto" poster="poster_click.jpg"></video>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact">
@@ -181,7 +72,6 @@
     </section>
   </div>
 
-  <!-- Overlay -->
   <div class="overlay" id="overlay">
     <span class="close" id="closeBtn">&times;</span>
     <video id="overlayVideo" controls autoplay></video>
@@ -210,11 +100,8 @@
     }
 
     closeBtn.addEventListener("click", closeOverlay);
-
     overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) {
-        closeOverlay();
-      }
+      if (e.target === overlay) closeOverlay();
     });
   </script>
 </body>
