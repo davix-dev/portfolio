@@ -23,7 +23,6 @@
     .project:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.8); }
     .project h3 { color: #6366f1; margin: 10px 0 5px 0; }
     .project video { width: 100%; border-radius: 8px; margin-bottom: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .project p { font-size: 0.9rem; color: #aaa; }
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
     .overlay video { width: 80%; max-width: 900px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.9); }
     .overlay .close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; }
@@ -32,6 +31,7 @@
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav>
     <ul>
       <li><a href="#about">About Me</a></li>
@@ -41,6 +41,7 @@
   </nav>
 
   <div class="container">
+    <!-- About Me -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about">
@@ -49,20 +50,22 @@
       </div>
     </section>
 
+    <!-- Projects -->
     <section id="projects">
       <h2>My Projects</h2>
       <div class="projects">
-        <div class="project" data-video="GAG.mp4">
+        <div class="project">
           <h3>Grow a Garden System</h3>
-          <video src="GAG.mp4" muted autoplay loop preload="auto" poster="poster_gag.jpg"></video>
+          <video src="GAG.webm" muted autoplay loop preload="auto" poster="poster_gag.jpg"></video>
         </div>
-        <div class="project" data-video="click.mp4">
+        <div class="project">
           <h3>Clicker Simulator System</h3>
-          <video src="click.mp4" muted autoplay loop preload="auto" poster="poster_click.jpg"></video>
+          <video src="click.webm" muted autoplay loop preload="auto" poster="poster_click.jpg"></video>
         </div>
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact">
@@ -72,6 +75,7 @@
     </section>
   </div>
 
+  <!-- Overlay -->
   <div class="overlay" id="overlay">
     <span class="close" id="closeBtn">&times;</span>
     <video id="overlayVideo" controls autoplay></video>
@@ -84,9 +88,12 @@
     const closeBtn = document.getElementById("closeBtn");
 
     projects.forEach(project => {
+      const smallVideo = project.querySelector("video");
+
       project.addEventListener("click", () => {
-        const videoSrc = project.getAttribute("data-video");
-        overlayVideo.src = videoSrc;
+        // Giữ trạng thái video preview
+        overlayVideo.src = smallVideo.currentSrc;
+        overlayVideo.currentTime = smallVideo.currentTime;
         overlay.style.display = "flex";
         overlayVideo.play();
       });
@@ -100,9 +107,11 @@
     }
 
     closeBtn.addEventListener("click", closeOverlay);
+
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeOverlay();
     });
   </script>
+
 </body>
 </html>
