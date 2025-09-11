@@ -324,25 +324,6 @@
       border: 3px solid var(--neon-blue);
     }
     
-    .overlay .close { 
-      position: absolute; 
-      top: 30px; 
-      right: 50px; 
-      font-size: 3rem; 
-      color: var(--neon-blue);
-      cursor: pointer; 
-      transition: all 0.3s ease;
-      text-shadow: 0 0 20px var(--neon-blue);
-      font-family: 'Orbitron', monospace;
-      font-weight: 900;
-    }
-    
-    .overlay .close:hover {
-      color: var(--neon-purple);
-      text-shadow: 0 0 30px var(--neon-purple);
-      transform: scale(1.2) rotate(90deg);
-    }
-    
     /* Contact Section with Matrix Effect */
     .contact { 
       background: linear-gradient(135deg, var(--card-bg), rgba(26, 26, 26, 0.9));
@@ -504,7 +485,6 @@
   </div>
 
   <div class="overlay" id="overlay">
-    <span class="close" id="closeBtn">&times;</span>
     <video id="overlayVideo" controls autoplay></video>
   </div>
 
@@ -545,8 +525,6 @@
     const projects = document.querySelectorAll(".project");
     const overlay = document.getElementById("overlay");
     const overlayVideo = document.getElementById("overlayVideo");
-    const closeBtn = document.getElementById("closeBtn");
-
     projects.forEach(project => {
       const smallVideo = project.querySelector("video");
 
@@ -564,8 +542,6 @@
       overlayVideo.currentTime = 0;
       overlayVideo.src = "";
     }
-
-    closeBtn.addEventListener("click", closeOverlay);
 
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeOverlay();
