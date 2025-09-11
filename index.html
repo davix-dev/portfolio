@@ -31,7 +31,6 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav>
     <ul>
       <li><a href="#about">About Me</a></li>
@@ -41,7 +40,6 @@
   </nav>
 
   <div class="container">
-    <!-- About Me -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about">
@@ -50,7 +48,6 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <h2>My Projects</h2>
       <div class="projects">
@@ -65,7 +62,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact">
@@ -91,7 +87,6 @@
       const smallVideo = project.querySelector("video");
 
       project.addEventListener("click", () => {
-        // Giữ trạng thái video preview
         overlayVideo.src = smallVideo.currentSrc;
         overlayVideo.currentTime = smallVideo.currentTime;
         overlay.style.display = "flex";
