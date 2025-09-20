@@ -196,7 +196,6 @@
     <section id="projects">
       <h2 class="glitch">My Projects</h2>
       <div class="projects" id="projects-container">
-        <!-- Projects sẽ được thêm vào đây bằng JavaScript -->
       </div>
     </section>
 
@@ -215,7 +214,6 @@
   </div>
 
   <script>
-    // Particle system
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
       const particleCount = 50;
@@ -232,7 +230,6 @@
     }
     document.addEventListener('DOMContentLoaded', createParticles);
 
-    // Video overlay
     const projects=document.querySelectorAll(".project");
     const overlay=document.getElementById("overlay");
     const overlayVideo=document.getElementById("overlayVideo");
@@ -255,7 +252,6 @@
     overlay.addEventListener("click",e=>{if(e.target===overlay)closeOverlay();});
     document.addEventListener("keydown",e=>{if(e.key==="Escape" && overlay.style.display==="flex"){closeOverlay();}});
 
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
       anchor.addEventListener('click',function(e){
         e.preventDefault();
@@ -264,7 +260,6 @@
       });
     });
 
-    // Navigation shadow on scroll
     let lastScrollTop=0;
     window.addEventListener('scroll',function(){
       const nav=document.querySelector('nav');
@@ -274,7 +269,7 @@
       lastScrollTop=scrollTop<=0?0:scrollTop;
     });
 
-    // Load projects
+
     function loadProjects() {
         const container = document.getElementById('projects-container');
         
