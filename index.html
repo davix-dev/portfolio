@@ -195,19 +195,8 @@
 
     <section id="projects">
       <h2 class="glitch">My Projects</h2>
-      <div class="projects">
-        <div class="project">
-          <h3>Steal a Plane</h3>
-          <video src="Steal_a_plane.mp4" muted autoplay loop preload="auto" poster="poster_steal.jpg"></video>
-        </div>
-        <div class="project">
-          <h3>Clicker Simulator System</h3>
-          <video src="click.mp4" muted autoplay loop preload="auto" poster="poster_click.jpg"></video>
-        </div>
-        <div class="project">
-          <h3>Grow a Garden System</h3>
-          <video src="GAG.mp4" muted autoplay loop preload="auto" poster="poster_gag.jpg"></video>
-        </div>
+      <div class="projects" id="projects-container">
+        <!-- Projects sẽ được thêm vào đây bằng JavaScript -->
       </div>
     </section>
 
@@ -284,6 +273,24 @@
       else{nav.style.boxShadow='0 0 30px rgba(0,255,255,0.3)';}
       lastScrollTop=scrollTop<=0?0:scrollTop;
     });
+
+    // Load projects
+    function loadProjects() {
+        const container = document.getElementById('projects-container');
+        
+        projectData.forEach(project => {
+            const projectDiv = document.createElement('div');
+            projectDiv.className = 'project';
+            projectDiv.innerHTML = `
+                <h3>${project.title}</h3>
+                <video src="${project.videoSrc}" muted autoplay loop preload="auto" poster="${project.poster}"></video>
+            `;
+            container.appendChild(projectDiv);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProjects);
   </script>
+  <script src="video.js"></script>
 </body>
 </html>
