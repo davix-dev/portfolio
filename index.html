@@ -131,8 +131,7 @@
     .about h2 { font-size: 3.5rem; margin-bottom: 25px; color: var(--text-primary); position: relative; z-index: 2; text-shadow: none; }
     .about h2 span { color: var(--neon-purple); text-shadow: 0 0 5px rgba(255,0,255,0.3); }
     .about p { margin-bottom: 20px; font-size: 1.3rem; font-weight: 400; position: relative; z-index: 2; }
-    .highlight-text { color: var(--neon-green); font-weight: 700; text-shadow: 0 0 15px var(--neon-green); animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .highlight-text { color: var(--neon-green); font-weight: 700; text-shadow: 0 0 15px var(--neon-green); }
 
     .projects { 
       display: grid; 
@@ -146,7 +145,6 @@
     .project h3 { color: var(--neon-purple); margin: 20px 0 15px 0; font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--neon-purple); }
     .project video { width: 100%; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 2px solid rgba(0,255,255,0.3); transition: all 0.3s ease; }
     .project:hover video { box-shadow: 0 15px 40px rgba(0,255,255,0.4); border-color: var(--neon-blue); }
-
 
     .overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display:none; justify-content:center; align-items:center; z-index:1000; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
@@ -213,79 +211,114 @@
     <video id="overlayVideo" controls autoplay></video>
   </div>
 
+  <script src="video.js"></script>
+  
   <script>
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
       const particleCount = 50;
-      for (let i=0;i<particleCount;i++){
-        const p=document.createElement('div');p.className='particle';
-        const size=Math.random()*4+1;p.style.width=size+'px';p.style.height=size+'px';
-        p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';
-        p.style.animationDelay=Math.random()*6+'s';
-        p.style.animationDuration=(Math.random()*4+4)+'s';
-        const colors=['#00ffff','#ff00ff','#00ff00'];
-        p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 4 + 1;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 6 + 's';
+        p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        const colors = ['#00ffff', '#ff00ff', '#00ff00'];
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
         particlesContainer.appendChild(p);
       }
     }
-    document.addEventListener('DOMContentLoaded', createParticles);
-
-    const projects=document.querySelectorAll(".project");
-    const overlay=document.getElementById("overlay");
-    const overlayVideo=document.getElementById("overlayVideo");
-    projects.forEach(project=>{
-      const smallVideo=project.querySelector("video");
-      project.addEventListener("click",()=>{
-        overlayVideo.src=smallVideo.currentSrc;
-        overlayVideo.currentTime=0;
-        overlay.style.display="flex";
-        overlayVideo.play();
-      });
-    });
-
-    function closeOverlay(){
-      overlay.style.display="none";
-      overlayVideo.pause();
-      overlayVideo.currentTime=0;
-      overlayVideo.src="";
-    }
-    overlay.addEventListener("click",e=>{if(e.target===overlay)closeOverlay();});
-    document.addEventListener("keydown",e=>{if(e.key==="Escape" && overlay.style.display==="flex"){closeOverlay();}});
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click',function(e){
-        e.preventDefault();
-        const target=document.querySelector(this.getAttribute('href'));
-        if(target){target.scrollIntoView({behavior:'smooth', block:'start'});}
-      });
-    });
-
-    let lastScrollTop=0;
-    window.addEventListener('scroll',function(){
-      const nav=document.querySelector('nav');
-      const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
-      if(scrollTop>lastScrollTop){nav.style.boxShadow='0 0 50px rgba(0,255,255,0.5)';}
-      else{nav.style.boxShadow='0 0 30px rgba(0,255,255,0.3)';}
-      lastScrollTop=scrollTop<=0?0:scrollTop;
-    });
-
 
     function loadProjects() {
-        const container = document.getElementById('projects-container');
-        
-        projectData.forEach(project => {
-            const projectDiv = document.createElement('div');
-            projectDiv.className = 'project';
-            projectDiv.innerHTML = `
-                <h3>${project.title}</h3>
-                <video src="${project.videoSrc}" muted autoplay loop preload="auto" poster="${project.poster}"></video>
-            `;
-            container.appendChild(projectDiv);
-        });
+      const container = document.getElementById('projects-container');
+      
+      projectData.forEach(project => {
+        const projectDiv = document.createElement('div');
+        projectDiv.className = 'project';
+        projectDiv.innerHTML = `
+          <h3>${project.title}</h3>
+          <video src="${project.videoSrc}" muted autoplay loop preload="auto" poster="${project.poster}"></video>
+        `;
+        container.appendChild(projectDiv);
+      });
+      
+      setupVideoClicks();
     }
 
-    document.addEventListener('DOMContentLoaded', loadProjects);
+    function setupVideoClicks() {
+      const overlay = document.getElementById('overlay');
+      const overlayVideo = document.getElementById('overlayVideo');
+      const projects = document.querySelectorAll('.project');
+      
+      projects.forEach(project => {
+        const video = project.querySelector('video');
+        project.addEventListener('click', () => {
+          overlayVideo.src = video.src;
+          overlayVideo.currentTime = 0;
+          overlay.style.display = 'flex';
+          overlayVideo.play();
+        });
+      });
+    }
+
+    function closeOverlay() {
+      const overlay = document.getElementById('overlay');
+      const overlayVideo = document.getElementById('overlayVideo');
+      overlay.style.display = 'none';
+      overlayVideo.pause();
+      overlayVideo.currentTime = 0;
+      overlayVideo.src = '';
+    }
+
+    function setupSmoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    function setupNavScroll() {
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', function() {
+        const nav = document.querySelector('nav');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          nav.style.boxShadow = '0 0 50px rgba(0,255,255,0.5)';
+        } else {
+          nav.style.boxShadow = '0 0 30px rgba(0,255,255,0.3)';
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      loadProjects();
+      setupSmoothScroll();
+      setupNavScroll();
+
+      const overlay = document.getElementById('overlay');
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeOverlay();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') {
+          closeOverlay();
+        }
+      });
+    });
   </script>
-  <script src="video.js"></script>
 </body>
 </html>
