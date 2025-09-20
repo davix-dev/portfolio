@@ -5,9 +5,9 @@ const projectData = [
         poster: "poster_drag.jpg"
     },
     {
-        title: "Steal a Plane",
+        title: "Steal a Brainrot System",
         videoSrc: "Steal_a_plane.mp4",
-        poster: "poster _steal.jpg"
+        poster: "poster_steal.jpg"
     },
     {
         title: "Progression System",
